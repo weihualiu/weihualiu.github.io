@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://liuweihua.cn/202106/hello_world/</loc>
+    
+    <lastmod>2021-08-17T00:47:24.679Z</lastmod>
+    
+    <date>1623801600000</date>
+    <title>Hello World | Life Sport</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>http://liuweihua.cn/202106/openssl_java_certs/</loc>
+    
+    <lastmod>2021-08-17T00:47:24.679Z</lastmod>
+    
+    <date>1624233600000</date>
+    <title>openssl与java混合证书生成 | Life Sport</title>
+    
+    <desc>最近项目上有关于同时生产openssl和keystore证书的需求。于是简单的了解了一下。以下是生成证书步骤： 生成ca证书认证中心的公钥证书和私钥12345678910111213141516171819202122[root@localcert]# opensslreq-newkeyrsa:2048-x509-keyoutca.key-outca.crtGeneratinga2048bitRS</desc>
+  </url>
+  
+  <url>
+    <loc>http://liuweihua.cn/202106/vscode_java_demo/</loc>
+    
+    <lastmod>2021-08-17T00:47:24.679Z</lastmod>
+    
+    <date>1624060800000</date>
+    <title>Vscode Java Demo Install And Deploy | Life Sport</title>
+    
+    <desc>安装Vscode下载地址https://code.visualstudio.com/download# 安装插件 Java Extension Pack 安装配置Gradle下载Gradle下载地址https://gradle.org/releases/ 配置环境Macbook12echo &#x27;export GRADLE_HOME=$HOME/gralde&#x27; &gt;&gt; ~</desc>
+  </url>
+  
+  <url>
+    <loc>http://liuweihua.cn/202106/yaws_mobile_https/</loc>
+    
+    <lastmod>2021-08-17T00:47:24.679Z</lastmod>
+    
+    <date>1624492800000</date>
+    <title>yaws搭建mobile app https下载服务器 | Life Sport</title>
+    
+    <desc>需要注意的几点：ca证书和user证书密码必须一致；默认配置的webserver，如果是直接文件路径则必须是get请求（不能是post请求）android、ios下载客户端文件前，需要先安装ca公钥证书 步骤：安装并配置erlang、yaws基础环境包制作https需要的证书 建立serial文件，输入序列号值，如010000000001，16进制)6字节存储的序列号1[root@mbank de</desc>
+  </url>
+  
+  <url>
+    <loc>http://liuweihua.cn/about/index.html</loc>
+    
+    <lastmod>2021-08-17T00:47:24.679Z</lastmod>
+    
+    <date>1629161244679</date>
+    <title>关于我 | Life Sport</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>http://liuweihua.cn/404.html</loc>
+    
+    <lastmod>2021-08-17T00:47:24.679Z</lastmod>
+    
+    <date>1629161244679</date>
+    <title>404 | Life Sport</title>
+    
+    <desc></desc>
+  </url>
+  
+</urlset>

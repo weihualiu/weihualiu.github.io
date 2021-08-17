@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Life Sport</title>
+  <icon>http://liuweihua.cn/icon.png</icon>
+  
+  <link href="http://liuweihua.cn/atom.xml" rel="self"/>
+  
+  <link href="http://liuweihua.cn/"/>
+  <updated>2021-08-17T00:47:24.679Z</updated>
+  <id>http://liuweihua.cn/</id>
+  
+  <author>
+    <name>WeiHua Liu</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>yaws搭建mobile app https下载服务器</title>
+    <link href="http://liuweihua.cn/202106/yaws_mobile_https/"/>
+    <id>http://liuweihua.cn/202106/yaws_mobile_https/</id>
+    <published>2021-06-24T00:00:00.000Z</published>
+    <updated>2021-08-17T00:47:24.679Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;需要注意的几点：&quot;&gt;&lt;a href=&quot;#需要注意的几点：&quot; class=&quot;headerlink&quot; title=&quot;需要注意的几点：&quot;&gt;&lt;/a&gt;需要注意的几点：&lt;/h1&gt;&lt;p&gt;ca证书和user证书密码必须一致；&lt;br&gt;默认配置的webserver，如果是直接文件路径则必须是get请求（不能是post请求）&lt;br&gt;android、ios下载客户端文件前，需要先安装ca公钥证书&lt;/p&gt;
+&lt;h1 id=&quot;步骤：&quot;&gt;&lt;a href=&quot;#步骤：&quot; class=&quot;headerlink&quot; title=&quot;步骤：&quot;&gt;&lt;/a&gt;步骤：&lt;/h1&gt;&lt;h2 id=&quot;安装并配置erlang、yaws基础环境包&quot;&gt;&lt;a href=&quot;#安装并配置erlang、yaws基础环境包&quot; class=&quot;headerlink&quot; title=&quot;安装并配置erlang、yaws基础环境包&quot;&gt;&lt;/a&gt;安装并配置erlang、yaws基础环境包&lt;/h2&gt;&lt;h2 id=&quot;制作https需要的证书&quot;&gt;&lt;a href=&quot;#制作https需要的证书&quot; class=&quot;headerlink&quot; title=&quot;制作https需要的证书&quot;&gt;&lt;/a&gt;制作https需要的证书&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;建立serial文件，输入序列号值，如010000000001，16进制)6字节存储的序列号&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[root@mbank demoCA]# vim serial&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;建立index.txt文件&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[root@mbank demoCA]# vim index.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;Linux下生成需要修改配置文件：/etc/pki/tls/openssl.cnf&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[ CA_default ]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dir = ./cert&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;生成2048的CA证书私钥&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;openssl genrsa -des3 -out ca_private.key 2048&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>openssl与java混合证书生成</title>
+    <link href="http://liuweihua.cn/202106/openssl_java_certs/"/>
+    <id>http://liuweihua.cn/202106/openssl_java_certs/</id>
+    <published>2021-06-21T00:00:00.000Z</published>
+    <updated>2021-08-17T00:47:24.679Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;最近项目上有关于同时生产openssl和keystore证书的需求。于是简单的了解了一下。以下是生成证书步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;生成ca证书认证中心的公钥证书和私钥&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;[root@localcert]#&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; opensslreq-newkeyrsa:2048-x509-keyoutca.key-outca.crt&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Generatinga2048bitRSAprivatekey&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;....................................................+++&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;........................+++&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;writingnewprivatekeyto&amp;#x27;ca.key&amp;#x27;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;EnterPEMpassphrase:输入CA密码&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Verifying-EnterPEMpassphrase:再次输入CA密码&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;-----&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Youareabouttobeaskedtoenterinformationthatwillbeincorporated&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;intoyourcertificaterequest.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;WhatyouareabouttoenteriswhatiscalledaDistinguishedNameoraDN.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Therearequiteafewfieldsbutyoucanleavesomeblank&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Forsomefieldstherewillbeadefaultvalue,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Ifyouenter&amp;#x27;.&amp;#x27;,thefieldwillbeleftblank.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;-----&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;CountryName(2lettercode)[XX]:CN&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;StateorProvinceName(fullname)[]:BeiJing&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;LocalityName(eg,city)[DefaultCity]:BeiJing&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OrganizationName(eg,company)[DefaultCompanyLtd]:BankOfMobile&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OrganizationalUnitName(eg,section)[]:Inc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;CommonName(eg,yournameoryourserver\&amp;#x27;shostname)[]:BankOfCA&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;EmailAddress[]:394806487@qq.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;生成keystore文件&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;[root@localcert]#&lt;/span&gt;&lt;span class=&quot;bash&quot;&gt; keytool-genkey-aliasbank_server-validity3650-keyalgRSA&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    -keysize2048-keypass123456-storepass123456-keystoreserver_keystore&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;您的名字与姓氏是什么?&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Unknown]:liu.weihua&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;您的组织单位名称是什么?&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Unknown]:BankOfMobile&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;您的组织名称是什么?&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Unknown]:Inc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;您所在的城市或区域名称是什么?&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Unknown]:BeiJing&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;您所在的省/市/自治区名称是什么?&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Unknown]:BeiJing&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;该单位的双字母国家/地区代码是什么?&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[Unknown]:CN&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;CN=liu.weihua,OU=BankOfMobile,O=Inc,L=BeiJing,ST=BeiJing,C=CN是否正确?&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[否]:是&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Vscode Java Demo Install And Deploy</title>
+    <link href="http://liuweihua.cn/202106/vscode_java_demo/"/>
+    <id>http://liuweihua.cn/202106/vscode_java_demo/</id>
+    <published>2021-06-19T00:00:00.000Z</published>
+    <updated>2021-08-17T00:47:24.679Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;安装Vscode&quot;&gt;&lt;a href=&quot;#安装Vscode&quot; class=&quot;headerlink&quot; title=&quot;安装Vscode&quot;&gt;&lt;/a&gt;安装Vscode&lt;/h1&gt;&lt;p&gt;下载地址&lt;a href=&quot;https://code.visualstudio.com/download#&quot;&gt;https://code.visualstudio.com/download#&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;安装插件-Java-Extension-Pack&quot;&gt;&lt;a href=&quot;#安装插件-Java-Extension-Pack&quot; class=&quot;headerlink&quot; title=&quot;安装插件 Java Extension Pack&quot;&gt;&lt;/a&gt;安装插件 Java Extension Pack&lt;/h1&gt;&lt;img src=&quot;/images/vscode_java_demo_0.jpg&quot; width=&quot;80%&quot; height=&quot;80%&quot;&gt;
+
+&lt;h1 id=&quot;安装配置Gradle&quot;&gt;&lt;a href=&quot;#安装配置Gradle&quot; class=&quot;headerlink&quot; title=&quot;安装配置Gradle&quot;&gt;&lt;/a&gt;安装配置Gradle&lt;/h1&gt;&lt;h2 id=&quot;下载Gradle&quot;&gt;&lt;a href=&quot;#下载Gradle&quot; class=&quot;headerlink&quot; title=&quot;下载Gradle&quot;&gt;&lt;/a&gt;下载Gradle&lt;/h2&gt;&lt;p&gt;下载地址&lt;a href=&quot;https://gradle.org/releases/&quot;&gt;https://gradle.org/releases/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;配置环境&quot;&gt;&lt;a href=&quot;#配置环境&quot; class=&quot;headerlink&quot; title=&quot;配置环境&quot;&gt;&lt;/a&gt;配置环境&lt;/h2&gt;&lt;h3 id=&quot;Macbook&quot;&gt;&lt;a href=&quot;#Macbook&quot; class=&quot;headerlink&quot; title=&quot;Macbook&quot;&gt;&lt;/a&gt;Macbook&lt;/h3&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;#x27;export GRADLE_HOME=$HOME/gralde&amp;#x27; &amp;gt;&amp;gt; ~/.bash_profile&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo &amp;#x27;export PATH=$PATH:/$GRADLE_HOME/bin&amp;#x27; &amp;gt;&amp;gt; ~/.bash_profile&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://liuweihua.cn/202106/hello_world/"/>
+    <id>http://liuweihua.cn/202106/hello_world/</id>
+    <published>2021-06-16T00:00:00.000Z</published>
+    <updated>2021-08-17T00:47:24.679Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
